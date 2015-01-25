@@ -6,12 +6,14 @@ What? Why?
 
 This code contains D interface to C functions that provide access to some of the capabilities of the FreeImage library. I could not get any of the existing bindings to FreeImage to work, so I decided to expose only the basic functions that were useful to me. I was happy to find that it was extremely easy to expose C functions to D and so I did not see the utility in creating an interface to the entire library.
 
-I have also compared the performance of this interface with Python via a simple test. In the test, 1000 PNG images are created and read back to calculate an average RGB value of all the pixels in each image. It was found that the D code was FIVE TIMES FASTER than Python!
+I have also compared the performance of this interface with Python via a simple test. In the test, 1000 PNG images are created and read back to calculate an average RGB value of all the pixels in each image. 
+
+It was found that the D code was FIVE TIMES FASTER than Python!
 
 Performance Test
 ----------------
 
-1000 PNG images of 640x480 are created sequentially and also in parallel. After creating, the images are also read back to calculate average RGB value in each image by accessing each pixel of the image.
+1000 PNG images of size 640x480 pixels are created sequentially and also in parallel. After creating, the images are immediately read back to calculate average RGB value in each image by accessing each pixel.
 
 Results
 -------
