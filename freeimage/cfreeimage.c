@@ -10,8 +10,6 @@ void fimg_get_version(char *val)
 
 int fimg_read(void **bitmapPtr, const char *filename)
 {
-    printf("Reading %s\n", filename);
-    printf("Len %d\n", strlen(filename));
     FREE_IMAGE_FORMAT formatInfo = FreeImage_GetFileType(filename, 0);
     if(formatInfo == FIF_UNKNOWN) 
     {
@@ -27,6 +25,7 @@ int fimg_read(void **bitmapPtr, const char *filename)
     }
     FIBITMAP *fibitmap = FreeImage_Load(formatInfo, filename, 0);
     *bitmapPtr = fibitmap;
+    return 0;
 }
 
 int fimg_get_height(void *bitmapPtr)
