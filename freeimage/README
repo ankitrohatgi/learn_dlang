@@ -10,7 +10,7 @@ This code contains D interface to C functions that provide access to some of the
 
 I have also compared the performance of this interface with Python via a simple test. In the test, 1000 PNG images are created and read back to calculate an average RGB value of all the pixels in each image. 
 
-It was found that the D code was FIVE TIMES FASTER than Python!
+It was found that the D code was FIVE TIMES FASTER than Python on my Desktop and EIGHT TIMES faster on my laptop!
 
 Performance Test
 ----------------
@@ -20,19 +20,38 @@ Performance Test
 Results
 -------
 
-D + FreeImage (see results_d.txt):
-    - Serial: 30 sec
-    - Parallel: 8 sec
+1. My Desktop: i5-4690K (4 Cores)
 
-Python (see results_python.txt):
-    - Serial: 157 sec
-    - Parallel: 42 sec
+    D + FreeImage (see results_d.txt):
+        - Serial: 30 sec
+        - Parallel: 8 sec
 
-Hardware:
-    - CPU: Intel i5-4690K (4 cores, no OC)
-    - RAM: 8 GB 1600 MHz
-    - OS: x86_64 Fedora 21
-    - HDD Speed: 7200 RPM 
+    Python (see results_python.txt):
+        - Serial: 157 sec
+        - Parallel: 42 sec
+
+    Hardware:
+        - CPU: Intel i5-4690K (4 cores, no OC)
+        - RAM: 8 GB 1600 MHz
+        - OS: x86_64 Fedora 21
+        - HDD Speed: 7200 RPM 
+
+2. My Laptop: Late 2011 Macbook Pro - i5-2435M (2 cores, 4 with hyperthreading)
+    
+    D + FreeImage (see results_d.txt):
+        - Serial: 45 sec
+        - Parallel: 24 sec
+
+    Python (see results_python.txt):
+        - Serial: 360 sec
+        - Parallel: 162 sec
+
+    Hardware:
+        - CPU: Intel i5-2435M (2 cores)
+        - RAM: 8 GB 1333 MHz
+        - OS: Mac OS 10.10.1
+        - HDD Speed: Samsung 840 SSD  
+
 
 Code Layout
 -----------
