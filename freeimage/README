@@ -1,6 +1,7 @@
-FreeImage inteface to D and performance comparison with Python
-==============================================================
-- Ankit Rohatgi
+FreeImage interface to D and performance comparison with Python
+===============================================================
+    - Ankit Rohatgi
+
 
 What? Why?
 ----------
