@@ -3,12 +3,13 @@ module freeimage;
 import std.stdio;
 import std.string;
 
+
 public class FreeImage
 {
     private:
         string filename_;
-        int height_;
-        int width_;
+        uint height_;
+        uint width_;
         void *bitmapPtr;
         bool isOpen;
 
@@ -32,9 +33,6 @@ public class FreeImage
         {
             return;
         }
-        char[100] testStr;
-        fimg_get_version(testStr.ptr); 
-        // int status = fimg_read(&bitmapPtr, filename_.ptr);
         fimg_read(&bitmapPtr, std.string.toStringz(filename_));
         height_ = fimg_get_height(bitmapPtr);
         width_ = fimg_get_width(bitmapPtr);
@@ -43,6 +41,19 @@ public class FreeImage
             throw new Exception(format("Error reading image %s", filename_));
         }
         isOpen = true;
+    }
+
+    public void create(uint width, uint height)
+    {
+        fimg_create(&bitmapPtr, width, height);
+        height_ = height;
+        width_ = width;
+        isOpen = true;
+    }
+
+    public void save()
+    {
+        fimg_save(bitmapPtr, std.string.toStringz(filename_));
     }
 
     public int height()
@@ -61,16 +72,21 @@ public class FreeImage
         isOpen = false;
     }
 
-    public int[4] getPixel(int x, int y)
+    public char[4] getPixel(uint x, uint y)
     {
         char[4] rgba;
-        fimg_get_pixel_color(bitmapPtr, x, y, rgba.ptr);
-        int[4] rgbaInt;
-        rgbaInt[0] = rgba[0];
-        rgbaInt[1] = rgba[1];
-        rgbaInt[2] = rgba[2];
-        rgbaInt[3] = rgba[3];
-        return rgbaInt;
+        fimg_get_pixel_color(bitmapPtr, x, height_ - y - 1, rgba.ptr);
+        return rgba;
+    }
+
+    public void setPixel(uint x, uint y, char r, char g, char b, char a = 255)
+    {
+        char[4] rgba;
+        rgba[0] = r;
+        rgba[1] = g;
+        rgba[2] = b;
+        rgba[3] = a;
+        fimg_set_pixel_color(bitmapPtr, x, height_ - y - 1, rgba.ptr);
     }
 }
 
@@ -78,8 +94,11 @@ extern(C)
 {
     void fimg_get_version(char *val);
     int fimg_read(void **bitmapPtr, immutable(char)* filename);
-    int fimg_get_height(void *bitmapPtr);
-    int fimg_get_width(void *bitmapPtr);
+    void fimg_create(void **bitmapPtr, uint width, uint height); 
+    void fimg_save(void *bitmapPtr, immutable(char)* filename);
+    uint fimg_get_height(void *bitmapPtr);
+    uint fimg_get_width(void *bitmapPtr);
     void fimg_get_pixel_color(void *bitmapPtr, uint x, uint y, char *rgba);
+    void fimg_set_pixel_color(void *bitmapPtr, uint x, uint y, char *rgba);
     void fimg_unload(void *bitmapPtr);
 }
