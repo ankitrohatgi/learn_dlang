@@ -38,11 +38,11 @@ Results
 
 2. My Laptop: Late 2011 Macbook Pro - i5-2435M (2 cores, 4 with hyperthreading)
     
-    D + FreeImage (see results_d.txt):
+    D + FreeImage (see results_d_mac.txt):
         - Serial: 45 sec
         - Parallel: 24 sec
 
-    Python (see results_python.txt):
+    Python (see results_python_mac.txt):
         - Serial: 360 sec
         - Parallel: 162 sec
 
