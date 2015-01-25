@@ -1,4 +1,6 @@
 #!/bin/bash
+# 
+# FreeImage was installed using macports on Mac
 
 if [ -f main ]
     then
