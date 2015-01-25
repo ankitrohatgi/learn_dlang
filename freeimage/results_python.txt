@@ -1,0 +1,2 @@
+1000 images in serial:  157.202490091  sec
+1000 images in parallel:  41.8613789082  sec

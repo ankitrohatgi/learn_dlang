@@ -34,9 +34,9 @@ void average_image(string folder, int i)
         for(uint y = 1; y <= height; y++)
         {
             pix = img.getPixel(x, y);
-            r_avg = (r_avg*count + uint(pix[0]))/double(count);
-            g_avg = (g_avg*count + uint(pix[1]))/double(count);
-            b_avg = (b_avg*count + uint(pix[2]))/double(count);
+            r_avg = (r_avg*count + uint(pix[0]))/(count + 1.0);
+            g_avg = (g_avg*count + uint(pix[1]))/(count + 1.0);
+            b_avg = (b_avg*count + uint(pix[2]))/(count + 1.0);
             count++;
         }
     }
