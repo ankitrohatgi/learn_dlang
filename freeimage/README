@@ -6,11 +6,11 @@ FreeImage interface to D and performance comparison with Python
 What? Why?
 ----------
 
-This code contains D interface to C functions that provide access to some of the capabilities of the FreeImage library. I could not get any of the existing bindings to FreeImage to work, so I decided to expose only the basic functions that were useful to me. I was happy to find that it was extremely easy to expose C functions to D and so I did not see the utility in creating an interface to the entire library.
+This code contains D interface to C functions that provide access to some of the capabilities of the FreeImage library. I could not get any of the existing bindings to FreeImage to work (e.g. derelict-fi), so I decided to expose only the basic functions that were useful to me. I was happy to find that it was extremely easy to expose C functions to D and so I did not see the utility in creating an interface to the entire library.
 
 I have also compared the performance of this interface with Python via a simple test. In the test, 1000 PNG images are created and read back to calculate an average RGB value of all the pixels in each image. 
 
-It was found that the D code was FIVE TIMES FASTER than Python on my Desktop and EIGHT TIMES faster on my laptop!
+I found that the D code was FIVE TIMES FASTER than Python on my Desktop and EIGHT TIMES faster on my laptop!
 
 Performance Test
 ----------------
@@ -62,5 +62,16 @@ Code Layout
     - python.py - Python code for performance comparison.
 
 
-License: Public Domain
+References
+----------
+
+    - D Programming Language: http://dlang.org
+    - Interfacing D to C: http://dlang.org/interfaceToC.html
+    - FreeImage Library: http://freeimage.sourceforge.net
+    - A pre-existing FreeImage binding to D: https://github.com/DerelictOrg/DerelictFI (I didn't spend enough time to get this working. Initial attempts were quite unsuccessful). 
+
+License
+-------
+
+    Public Domain! Suggestions Welcome!
 
