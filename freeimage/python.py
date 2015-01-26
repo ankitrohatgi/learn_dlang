@@ -24,8 +24,8 @@ def average_image(folder, i):
         for xi in range(0, imgSize[1]):
             col = imgData[yi, xi]
             r_avg = (r_avg*count + col[0])/(count + 1)
-            g_avg = (g_avg*count + col[0])/(count + 1)
-            b_avg = (b_avg*count + col[0])/(count + 1)
+            g_avg = (g_avg*count + col[1])/(count + 1)
+            b_avg = (b_avg*count + col[2])/(count + 1)
             count = count + 1
 
 def generate_1000():
