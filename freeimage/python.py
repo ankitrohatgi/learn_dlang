@@ -1,4 +1,4 @@
-# Python script for performance comparision
+# Python script for performance comparison
 
 # Thanks to /u/Veedrac (reddit.com):
 

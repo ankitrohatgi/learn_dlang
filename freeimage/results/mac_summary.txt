@@ -1,0 +1,5 @@
+All times are in seconds
+
+            D       Python      PyPy
+Serial      33      154         27
+Parallel    17      78          12
