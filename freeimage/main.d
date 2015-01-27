@@ -26,7 +26,7 @@ void average_image(string folder, int i)
     double g_avg = 0;
     double b_avg = 0;
 
-    long count = 0;
+    long count = height*width;
     char[4] pix;
 
     for(uint x = 1; x <= width; x++)
@@ -34,12 +34,14 @@ void average_image(string folder, int i)
         for(uint y = 1; y <= height; y++)
         {
             pix = img.getPixel(x, y);
-            r_avg = (r_avg*count + uint(pix[0]))/(count + 1.0);
-            g_avg = (g_avg*count + uint(pix[1]))/(count + 1.0);
-            b_avg = (b_avg*count + uint(pix[2]))/(count + 1.0);
-            count++;
+            r_avg += uint(pix[0]);
+            g_avg += uint(pix[1]);
+            b_avg += uint(pix[2]);
         }
     }
+    r_avg = r_avg/count;
+    g_avg = g_avg/count;
+    b_avg = b_avg/count;
     img.close();
 }
 
@@ -84,11 +86,8 @@ void main()
     writeln("Dimensions: (", img.width(), ", ", img.height(), ")");
 
     auto rgba = img.getPixel(100, 100);
-    writeln("RGBA at Pixel (100, 100): [", 
-            int(rgba[0]), ", ", 
-            int(rgba[1]), ", ", 
-            int(rgba[2]), ", ", 
-            int(rgba[3]), "]");
+    writefln("RGBA at Pixel (100, 100): [%d, %d, %d, %d]", 
+             rgba[0], rgba[1], rgba[2], rgba[3]);
 
     // Generate 1000 images and calculate average RGB:
     generate_1000_images();

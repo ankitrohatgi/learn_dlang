@@ -3,6 +3,10 @@ FreeImage interface to D and performance comparison with Python
     - Ankit Rohatgi
 
 
+SEE DISCUSSION: http://www.reddit.com/r/programming/comments/2tp7a3/image_processing_in_d_vs_python_a_quick_and_dirty/
+
+NOTE: I am in the process of making the changes as per the discussion on Reddit.
+
 What? Why?
 ----------
 
@@ -12,12 +16,14 @@ I have also compared the performance of this interface with Python via a simple 
 
 It was found that the D code was FIVE TIMES FASTER than Python on my Desktop and EIGHT TIMES faster on my laptop!
 
+EDIT: As pointed out in the discussion on Reddit, the Python performance can be greatly improved by using numpy or executing the code via PyPy. 
+
 Performance Test
 ----------------
 
 1000 PNG images of size 640x480 pixels are created sequentially and also in parallel. After creating, the images are immediately read back to calculate average RGB value in each image by accessing each pixel.
 
-Results
+Results (These are outdated - will be updated soon!)
 -------
 
 1. My Desktop: i5-4690K (4 Cores)

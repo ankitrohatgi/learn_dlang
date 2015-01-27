@@ -1,4 +1,4 @@
 Dimensions: (640, 400)
 RGBA at Pixel (100, 100): [255, 255, 255, 0]
-Time taken for creating 1000 images: 44 secs, 733 ms, and 289 μs
-Time taken for creating 1000 images in parallel: 23 secs, 905 ms, and 905 μs
+Time taken for creating 1000 images: 32 secs, 644 ms, and 320 μs
+Time taken for creating 1000 images in parallel: 17 secs, 358 ms, and 64 μs
