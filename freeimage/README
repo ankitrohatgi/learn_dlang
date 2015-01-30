@@ -5,8 +5,6 @@ FreeImage interface to D and performance comparison with Python
 
 SEE DISCUSSION: http://www.reddit.com/r/programming/comments/2tp7a3/image_processing_in_d_vs_python_a_quick_and_dirty/
 
-NOTE: I am in the process of making the changes as per the discussion on Reddit.
-
 What? Why?
 ----------
 
@@ -14,27 +12,21 @@ This code contains D interface to C functions that provide access to some of the
 
 I have also compared the performance of this interface with Python via a simple test. In the test, 1000 PNG images are created and read back to calculate an average RGB value of all the pixels in each image. 
 
-I found that the D code was FIVE TIMES FASTER than Python on my Desktop and EIGHT TIMES faster on my laptop!
-
-EDIT: As pointed out in the discussion on Reddit, the Python performance can be greatly improved by using numpy or executing the code via PyPy. 
+It was found that the D code was about 3-4 times faster when compared to the Python code running with the default Python interpreter (However, it was pointed out on Reddit, that the use of numpy.mean() could have resulted in a much quicker computation). With PyPy, Python code was slightly faster than D. It was pointed out on Reddit that using GDC instead of DMD could have resulted in faster runtimes for D code as well. In conclusion, I think both D and Python approaches are comparable in performance. Using correct optimizations and interpreter (PyPy) makes a huge difference in the outcome.
 
 Performance Test
 ----------------
 
 1000 PNG images of size 640x480 pixels are created sequentially and also in parallel. After creating, the images are immediately read back to calculate average RGB value in each image by accessing each pixel.
 
-Results (These are outdated - will be updated soon!)
--------
+Results (All times are in seconds)
+----------------------------------
 
 1. My Desktop: i5-4690K (4 Cores)
 
-    D + FreeImage (see results_d.txt):
-        - Serial: 30 sec
-        - Parallel: 8 sec
-
-    Python (see results_python.txt):
-        - Serial: 157 sec
-        - Parallel: 42 sec
+                D       Python      PyPy
+    Serial      24      63          15
+    Parallel     6      17           4
 
     Hardware:
         - CPU: Intel i5-4690K (4 cores, no OC)
@@ -43,14 +35,10 @@ Results (These are outdated - will be updated soon!)
         - HDD Speed: 7200 RPM 
 
 2. My Laptop: Late 2011 Macbook Pro - i5-2435M (2 cores, 4 with hyperthreading)
-    
-    D + FreeImage (see results_d_mac.txt):
-        - Serial: 45 sec
-        - Parallel: 24 sec
-
-    Python (see results_python_mac.txt):
-        - Serial: 360 sec
-        - Parallel: 162 sec
+ 
+                D       Python      PyPy
+    Serial      33      154         27
+    Parallel    17      78          12
 
     Hardware:
         - CPU: Intel i5-2435M (2 cores)
@@ -74,7 +62,8 @@ References
     - D Programming Language: http://dlang.org
     - Interfacing D to C: http://dlang.org/interfaceToC.html
     - FreeImage Library: http://freeimage.sourceforge.net
-    - A pre-existing FreeImage binding to D: https://github.com/DerelictOrg/DerelictFI (I didn't spend enough time to get this working. Initial attempts were quite unsuccessful). 
+    - A pre-existing FreeImage binding to D: https://github.com/DerelictOrg/DerelictFI (This is probably what I should have used).
+    - PyPy: http://pypy.org/ 
 
 License
 -------
