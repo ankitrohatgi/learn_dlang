@@ -1,0 +1,3 @@
+Call GraphicsMagick C api from D to create, read and modify images.
+
+Based on the results, it appears that disk I/O is slower with GraphicsMagick compared to FreeImage. But since GraphicsMagick is a lot more powerful, I might end up using this for other projects.
