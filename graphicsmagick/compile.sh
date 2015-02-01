@@ -5,7 +5,7 @@ if [ -f main ]
         rm main
 fi
 
-gcc -O3 -c graphicsmagick_c.c -I /usr/include/GraphicsMagick -pipe -Os -Wall -D_THREAD_SAFE -std=c99
+gcc -O3 -c graphicsmagick_c.c -I /usr/include/GraphicsMagick
 dmd -O -inline -release -c graphicsmagick.d
 dmd -O -inline -release -c main.d
 dmd -O -inline -release -c perf.d

@@ -59,7 +59,8 @@ int gm_create(void **imageInfoPtr, void **imagePtr, unsigned int width, unsigned
 {
     // Pixels
     char *pixels = (char*)malloc(4*width*height*sizeof(char));
-    for(unsigned int i = 0; i < 4*width*height; i++)
+    unsigned int i;
+    for(i = 0; i < 4*width*height; i++)
     {
         pixels[i] = 0; // default background color?
     }
