@@ -1,6 +1,5 @@
 #include <magick/api.h>
 #include <string.h>
-#include <stdio.h>
 
 void gm_initialize_magick()
 {
@@ -44,7 +43,6 @@ int gm_write(void *imageInfoPtr, void *imagePtr, const char *filename)
     ImageInfo *imageInfo = (ImageInfo*)imageInfoPtr;
     strcpy(imageInfo->filename, filename);
     
-    printf("Writing %s - %lu\n", imageInfo->filename, strlen(imageInfo->filename));
     // WriteImage
     Image *image = (Image*)imagePtr;
     strcpy(image->filename, filename);
@@ -54,6 +52,38 @@ int gm_write(void *imageInfoPtr, void *imagePtr, const char *filename)
         return -1;
     }
 
+    return 0;
+}
+
+int gm_create(void **imageInfoPtr, void **imagePtr, unsigned int width, unsigned height)
+{
+    // Pixels
+    char *pixels = (char*)malloc(4*width*height*sizeof(char));
+    for(unsigned int i = 0; i < 4*width*height; i++)
+    {
+        pixels[i] = 0; // default background color?
+    }
+    
+    // ExceptionInfo
+    ExceptionInfo exception;
+    GetExceptionInfo(&exception);    
+
+    // ImageInfo
+    ImageInfo *imageInfo;
+    imageInfo = CloneImageInfo(0);
+    
+    // Image    
+    Image *image;
+    image = ConstituteImage(width, height, "RGBA", CharPixel, pixels, &exception);
+
+    if(image == (Image*)NULL)
+    {
+        CatchException(&exception);
+        return -1;
+    }
+    free(pixels);
+    *imageInfoPtr = imageInfo;
+    *imagePtr = image;
     return 0;
 }
 
@@ -78,7 +108,12 @@ void gm_destroy(void *imageInfoPtr, void *imagePtr)
     DestroyImage(image);
 }
 
-int gm_get_pixels(void *imagePtr, void **pixelPacketPtr, long x, long y, unsigned long columns, unsigned long rows)
+int gm_get_pixels(void *imagePtr, 
+                  void **pixelPacketPtr,
+                  long x, 
+                  long y, 
+                  unsigned long columns, 
+                  unsigned long rows)
 {
     Image *image = (Image*)imagePtr;
     PixelPacket *pixelPacket = GetImagePixels(image, x, y, columns, rows);

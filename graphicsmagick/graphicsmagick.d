@@ -98,8 +98,22 @@ public class GMImage
 
     public void create(uint width, uint height)
     {
+        int status = gm_create(&imageInfoPtr, &imagePtr, width, height);
+        if(status < 0)
+        {
+            throw new Exception(format("Cannot create image!"));
+        }
+
         imageWidth = width;
         imageHeight = height;
+
+        // read all the pixels into memory
+        status = gm_get_pixels(imagePtr, &pixelPacketPtr, 0, 0, imageWidth, imageHeight);
+        if(status < 0)
+        {
+            throw new Exception(format("Cannot read created image!"));
+        }
+        isOpen = true;
     }
 
     public GMColor getPixel(uint x, uint y)
@@ -128,6 +142,7 @@ extern(C)
 
     int gm_read(void **imageInfoPtr, void **imagePtr, immutable(char)* filename);
     int gm_write(void *imageInfoPtr, void *imagePtr, immutable(char)* filename);
+    int gm_create(void **imageInfoPtr, void **imagePtr, uint width, uint height);
     uint gm_height(void *imagePtr);
     uint gm_width(void *imagePtr);
     void gm_destroy(void *imageInfoPtr, void *imagePtr);
