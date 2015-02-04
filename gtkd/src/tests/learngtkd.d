@@ -16,20 +16,42 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110, USA
  */
 
-module gtk.HelloWorld;
-
-private import gtk.MainWindow;
-private import gtk.Label;
-private import gtk.Main;
+import gtk.MainWindow;
+import gtk.Label;
+import gtk.Main;
+import gtk.MenuBar;
+import gtk.VBox;
+import gtk.MenuItem;
+import gtk.Menu;
 
 class HelloWorld : MainWindow
 {
 	this()
 	{
 		super("GtkD");
-		setBorderWidth(10);
-		add(new Label("Hello World"));
+        setDefaultSize(800,600);
+        
+        auto vbox = new VBox(false, 0);
 
+        auto menuBar = new MenuBar();
+
+        // File menu
+        auto fileMenuItem = new MenuItem("File");
+
+        auto fileMenu = new Menu(); 
+        auto testMenuItem = new MenuItem("Test");
+        auto test2MenuItem = new MenuItem("Test2");
+        fileMenu.append(testMenuItem);
+        fileMenu.append(test2MenuItem);
+        fileMenuItem.setSubmenu(fileMenu);
+
+        menuBar.append(fileMenuItem);
+        
+        // Pack items
+        vbox.packStart(menuBar, false, false, 0);
+        vbox.add(new Label("Hello World"));
+
+        add(vbox);
 		showAll();
 	}
 
