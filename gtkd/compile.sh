@@ -41,7 +41,7 @@ objectFiles=()
 # C files
 echo ""
 echo "Compiling C files:"
-for file in $(find ./digitization -type f -name "*.c" -print); do
+for file in $(find . -type f -name "*.c" -print); do
     
     flname=$(basename $file .c)
     objname="${flname}_${#objectFiles[@]}.o"
@@ -57,7 +57,7 @@ done
 # D files
 echo ""
 echo "Compiling D files:"
-for file in $(find ./digitization ./${PROG_DIR} -type f -name "*.d" -print); do
+for file in $(find . -type f -name "*.d" -print); do
 
     flname=$(basename $file .d)
     objname="${flname}_${#objectFiles[@]}.o"
