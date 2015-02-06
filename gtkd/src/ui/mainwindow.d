@@ -9,6 +9,8 @@ import gtk.HBox;
 import gtk.Label;
 import gtk.MessageDialog;
 
+import ui.graphicswidget;
+
 public class MyAppWindow : MainWindow
 {
     private VBox _vbox;
@@ -55,8 +57,9 @@ public class MyAppWindow : MainWindow
 
     private void createWidgets()
     {
+        auto graphicsWidget = new GraphicsWidget();
         auto hbox = new HBox(false, 0);
-        hbox.packStart(new Label("hello"), true, true, 10);
+        hbox.packStart(graphicsWidget, true, true, 10);
         hbox.packEnd(new Label("sidebar"), false, false, 10);
         _vbox.add(hbox);
     }
